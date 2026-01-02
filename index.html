@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>API Playground</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; }
+    button { padding: 10px 14px; }
+    pre { background: #f5f5f5; padding: 12px; overflow: auto; }
+    .row { margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <h1>API Playground</h1>
+
+  <div class="row">
+    <button id="btn">Call API</button>
+  </div>
+
+  <div class="row">
+    <div><strong>Status:</strong> <span id="status">Idle</span></div>
+  </div>
+
+  <pre id="out">Click “Call API”.</pre>
+
+  <script>
+    const statusEl = document.getElementById("status");
+    const outEl = document.getElementById("out");
+    const btn = document.getElementById("btn");
+
+    // Free public API that typically works without keys:
+    // JSONPlaceholder: fake data for testing
+    const url = "https://jsonplaceholder.typicode.com/todos/1";
+
+    btn.addEventListener("click", async () => {
+      statusEl.textContent = "Loading...";
+      outEl.textContent = "";
+
+      try {
+        const res = await fetch(url, { method: "GET" });
+        statusEl.textContent = `HTTP ${res.status}`;
+        const data = await res.json();
+        outEl.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        statusEl.textContent = "Error";
+        outEl.textContent = String(err);
+      }
+    });
+  </script>
+</body>
+</html>
