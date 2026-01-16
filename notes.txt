@@ -5,3 +5,5 @@ pip install -r requirements.txt
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 curl -X POST -F "file=@sample_pdfs/RepProv01.pdf" http://localhost:8000/extract/all
+curl -X POST -F "file=@sample_pdfs/RepProv01.pdf" http://localhost:8000/save/all
+curl http://localhost:8000/tables/all
