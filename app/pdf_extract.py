@@ -25,7 +25,7 @@ def extract_provider_report(pdf_path: str) -> dict:
             "quarter": match.group(1),
             "Ambulatory": int(match.group(2)),
             "Hospital": int(match.group(3)),
-            "Other/NA": int(match.group(4)),
+            "Other_NA": int(match.group(4)),
         })
 
     df_quarters = pd.DataFrame(quarterly_data)
